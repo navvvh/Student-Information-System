@@ -10,7 +10,7 @@ const FrontSection = () => {
       }}
     >
       
-      <div className="absolute inset-0 bg-white/35"></div>
+      <div className="absolute inset-0 bg-white/50"></div>
 
       
       <div className="absolute top-1 left-1/2 -translate-x-1/2 z-20">
@@ -26,7 +26,7 @@ const FrontSection = () => {
         </div>
       </div>
 
-      {/* Center Text Block */}
+
       <div className="relative z-20 text-center flex flex-col items-center mt-20">
         <p className="text-5xl font-alike text-black tracking-wide">
           Welcome To
@@ -42,7 +42,7 @@ const FrontSection = () => {
       </div>
 
       <div className="absolute bottom-20 w-full flex justify-center z-20">
-        <button className="btn font-alike bg-[#620C12] text-white hover:bg-[#4f090f] px-10 text-1xl">Get Started</button>
+        <button className="btn font-alike bg-[#620C12] text-white hover:bg-[#4f090f] px-10 text-1xl border-black">Get Started</button>
       </div>
     </section>
   );
