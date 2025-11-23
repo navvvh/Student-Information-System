@@ -1,11 +1,14 @@
-export default function App() {
+import React from "react";
+import { Routes, Route } from "react-router";
+import LandingPage from "./pages/LandingPage";
+
+const App = () => {
   return (
-    <h1 className=" text-blue-500 text-3xl font-bold underline">
-      Hello world!
-      hiworld
-    </h1>
-  )
-}
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
 
+    </Routes>
+  );
+};
 
-
+export default App;
