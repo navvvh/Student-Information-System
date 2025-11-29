@@ -1,9 +1,8 @@
-// ContactSection.jsx
 
 import React from "react";
 import tao from "../../assets/tao.png";
 
-// Re-using the InputField component for consistency
+
 const InputField = ({ label, id, type = 'text', required, className = '' }) => (
   <div className={`flex flex-col ${className}`}>
     <label htmlFor={id} className="text-sm font-serif mb-1 text-[#900000] font-semibold">
