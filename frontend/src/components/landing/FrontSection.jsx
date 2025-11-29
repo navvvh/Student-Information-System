@@ -1,8 +1,15 @@
 import bgImage from "../../assets/9.png";
 import bg8 from "../../assets/asdagffalhaalhjshgd.png";
+import { useNavigate } from "react-router-dom";
 
 const FrontSection = () => {
+const navigate = useNavigate();
+const goToRegister = () => {
+  navigate('/register');
+}
+
   return (
+    
     <section
       className="w-full min-h-screen bg-cover bg-center relative flex flex-col items-center justify-center"
       style={{
@@ -42,7 +49,7 @@ const FrontSection = () => {
       </div>
 
       <div className="absolute bottom-20 w-full flex justify-center z-20">
-        <button className="btn font-alike bg-[#620C12] text-white hover:bg-[#4f090f] px-10 text-1xl border-black">Get Started</button>
+        <button onClick={goToRegister} className="btn font-alike bg-[#620C12] text-white hover:bg-[#4f090f] px-10 text-1xl border-black">Get Started</button>
       </div>
     </section>
   );
