@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import Navbar from "../components/registration/navbar";
-import ProgressSection from "../components/registration/ProgressSection";
-import PersonalSection from "../components/registration/PersonalSection";
-import ContactSection from "../components/registration/ContactSection";
-import AcadInfoSection from "../components/registration/AcadInfoSection";
-import flag from "../assets/flag.png";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+"use client"
+
+import { useState } from "react"
+import Navbar from "../components/registration/navbar"
+import ProgressSection from "../components/registration/ProgressSection"
+import PersonalSection from "../components/registration/PersonalSection"
+import ContactSection from "../components/registration/ContactSection"
+import AcadInfoSection from "../components/registration/AcadInfoSection"
+import flag from "../assets/flag.png"
+import { toast } from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
 
 const RegistrationPage = () => {
-  const navigate = useNavigate();
-  const [step, setStep] = useState(1);
-
+  const navigate = useNavigate()
+  const [step, setStep] = useState(1)
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -27,34 +28,59 @@ const RegistrationPage = () => {
     enrollmentDate: "",
     yearLevel: "",
     gwa: "",
-  });
-
+  })
 
   const updateField = (key, value) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
-  };
+    setFormData((prev) => ({ ...prev, [key]: value }))
+  }
 
-  
+  const validateForm = () => {
+    const requiredFields = [
+      "firstName",
+      "lastName",
+      "studentId",
+      "gender",
+      "birthdate",
+      "hometown",
+      "contactNo",
+      "email",
+      "department",
+      "enrollmentDate",
+      "yearLevel",
+      "gwa",
+    ]
+
+    for (const field of requiredFields) {
+      if (!formData[field] || formData[field].toString().trim() === "") {
+        toast.error(`Please fill in all required fields`)
+        return false
+      }
+    }
+    return true
+  }
+
   const handleFinish = () => {
-    toast.loading("Submitting...");
+    if (!validateForm()) return
+
+    toast.loading("Submitting...")
 
     setTimeout(() => {
-      toast.dismiss();
-      toast.success("Registration Complete!");
+      toast.dismiss()
+      toast.success("Registration Complete!")
 
-      
-      const existing = JSON.parse(localStorage.getItem("students") || "[]");
-      existing.push(formData);
-      localStorage.setItem("students", JSON.stringify(existing));
+      const existing = JSON.parse(localStorage.getItem("students") || "[]")
+      existing.push({
+        ...formData,
+        id: Date.now(), // Added unique ID for proper tracking
+      })
+      localStorage.setItem("students", JSON.stringify(existing))
 
-      navigate("/records"); 
-    }, 800);
-  };
+      navigate("/records", { replace: true })
+    }, 800)
+  }
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden flex flex-col">
-      
-    {/* Background */}
       <div
         className="
           absolute inset-0 
@@ -69,13 +95,7 @@ const RegistrationPage = () => {
         <Navbar />
         <ProgressSection step={step} />
 
-        {step === 1 && (
-          <PersonalSection
-            onNext={() => setStep(2)}
-            updateField={updateField}
-            values={formData}
-          />
-        )}
+        {step === 1 && <PersonalSection onNext={() => setStep(2)} updateField={updateField} values={formData} />}
 
         {step === 2 && (
           <ContactSection
@@ -99,11 +119,13 @@ const RegistrationPage = () => {
       <footer className="bg-[#640000] text-white py-6 px-6">
         <div className="mx-auto flex justify-between items-center text-sm">
           <p>Montclair Academy © 2025</p>
-          <a href="#" className="hover:text-red-100">Privacy Policy</a>
+          <a href="#" className="hover:text-red-100">
+            Privacy Policy
+          </a>
         </div>
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default RegistrationPage;
+export default RegistrationPage

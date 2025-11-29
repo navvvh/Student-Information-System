@@ -1,6 +1,6 @@
-import React from "react";
-import tao from "../../assets/tao.png";
-import { toast } from 'react-hot-toast';
+"use client"
+import tao from "../../assets/tao.png"
+import { toast } from "react-hot-toast"
 
 const InputField = ({ label, id, value, onChange, type = "text", required, className = "" }) => (
   <div className={`flex flex-col ${className}`}>
@@ -16,33 +16,38 @@ const InputField = ({ label, id, value, onChange, type = "text", required, class
       className="p-2 border border-gray-300 rounded-sm focus:ring-1 focus:ring-[#900000] focus:border-[#900000] transition-colors"
     />
   </div>
-);
+)
 
 const AcadInfoSection = ({ onBack, onFinish, values, updateField }) => {
-  
   const handleFinish = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    toast.promise(
-      new Promise((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, 800);
-      }),
-      {
-        loading: 'Submitting...',
-        success: 'Registration Complete!',
-        error: 'Error occurred during submission.',
-      }
-    ).then(() => {
-      onFinish();
-    });
-  };
+    // Validate required fields
+    if (!values.department || !values.enrollmentDate || !values.yearLevel || !values.gwa) {
+      toast.error("Please fill in all required fields")
+      return
+    }
+
+    toast
+      .promise(
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve()
+          }, 800)
+        }),
+        {
+          loading: "Submitting...",
+          success: "Registration Complete!",
+          error: "Error occurred during submission.",
+        },
+      )
+      .then(() => {
+        onFinish()
+      })
+  }
 
   return (
     <div className="flex justify-center mx-auto my-8 max-w-5xl p-0 bg-white shadow-xl rounded-lg overflow-hidden min-h-[520px]">
-
-      
       <div
         className="w-[38%]"
         style={{
@@ -53,9 +58,7 @@ const AcadInfoSection = ({ onBack, onFinish, values, updateField }) => {
         }}
       ></div>
 
-      
       <div className="w-[62%] p-10 bg-white flex flex-col">
-
         <h2 className="text-2xl font-serif font-light mb-8 text-gray-800 border-b pb-2">
           Enter your academic information
         </h2>
@@ -102,7 +105,6 @@ const AcadInfoSection = ({ onBack, onFinish, values, updateField }) => {
             />
           </div>
 
-          
           <div className="flex justify-between gap-4 mt-auto">
             <button
               type="button"
@@ -122,7 +124,7 @@ const AcadInfoSection = ({ onBack, onFinish, values, updateField }) => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AcadInfoSection;
+export default AcadInfoSection
