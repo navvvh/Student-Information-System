@@ -19,7 +19,8 @@ const InputField = ({ label, id, type = 'text', required, className = '' }) => (
 
 const PersonalSection = ({ onNext }) => {
   return (
-    <div className="flex justify-center mx-auto my-8 max-w-5xl p-0 bg-white shadow-xl rounded-lg overflow-hidden">
+    <div className="flex justify-center mx-auto my-8 max-w-5xl p-0 bg-white shadow-xl rounded-lg overflow-hidden min-h-[520px]">
+
       
       <div
         className="w-[38%] p-4 flex flex-col justify-between items-center text-white" 
