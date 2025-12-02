@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import bg8 from "../../assets/asdagffalhaalhjshgd.png"
+import bg8 from "../../assets/asdagffalhaalhjshgd.png";
 
 export default function RecordsSection() {
   const navigate = useNavigate()
@@ -54,33 +54,12 @@ export default function RecordsSection() {
     }
   }
 
-  const handleInsert = () => {
-    const newStudent = {
-      id: Date.now(),
-      studentId: `2023-${Math.floor(Math.random() * 100000)}`,
-      firstName: "New",
-      lastName: "Student",
-      middleInitial: "X",
-      gender: "Unknown",
-      birthdate: "01/01/2000",
-      hometown: "Unknown",
-      contactNo: "0000000000",
-      email: "new@student.com",
-      department: "CCIT",
-      enrollmentDate: "2023-08-15",
-      yearLevel: "1st",
-      gwa: "0.00",
-    }
-    setStudents([...students, newStudent])
-  }
-
-  const handleUpdate = () => {
-    if (selectedIds.size === 0) return alert("Select a student to update")
-    const idToUpdate = Array.from(selectedIds)[0]
-    const updated = students.map((s) =>
-      (s.id || s.studentId) === idToUpdate ? { ...s, firstName: s.firstName + " Updated" } : s,
-    )
-    setStudents(updated)
+  const handleEdit = () => {
+    if (selectedIds.size === 0) return alert("Select a student to edit")
+    const idToEdit = Array.from(selectedIds)[0]
+    // Store the student ID in sessionStorage for the edit page to retrieve
+    sessionStorage.setItem("editingStudentId", idToEdit)
+    navigate("/edit-student")
   }
 
   const handleDelete = () => {
@@ -93,7 +72,7 @@ export default function RecordsSection() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <header className="bg-[#640000] text-white px-4 py-3 flex items-center gap-3">
-        <img src={bg8 || "/placeholder.svg"} alt="Montclair" className="w-16 h-16 -m-5" />
+        <img src={bg8} alt="Montclair" className="size-16 -m-5" />
         <span className="text-1xl font-alike leading-tight">
           Montclair <br /> Academy
         </span>
@@ -193,16 +172,10 @@ export default function RecordsSection() {
 
           <div className="flex gap-4">
             <button
-              onClick={handleInsert}
+              onClick={handleEdit}
               className="px-6 py-2 bg-[#640000] text-white rounded-lg hover:bg-red-800 font-medium transition"
             >
-              Insert
-            </button>
-            <button
-              onClick={handleUpdate}
-              className="px-6 py-2 bg-[#640000] text-white rounded-lg hover:bg-red-800 font-medium transition"
-            >
-              Update
+              Edit
             </button>
             <button
               onClick={handleDelete}
