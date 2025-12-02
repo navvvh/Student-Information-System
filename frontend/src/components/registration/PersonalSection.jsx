@@ -1,7 +1,7 @@
 "use client"
 import tao from "../../assets/tao.png"
 
-const InputField = ({ label, id, value, onChange, type = "text", required, className = "", placeholder = "", pattern }) => (
+const InputField = ({ label, id, value, onChange, type = "text", required, className = "", placeholder = "", pattern, step }) => (
   <div className={`flex flex-col ${className}`}>
     <label htmlFor={id} className="text-sm font-serif mb-1 text-[#900000] font-semibold">
       {label} {required && <span className="text-red-600">*</span>}
@@ -16,6 +16,7 @@ const InputField = ({ label, id, value, onChange, type = "text", required, class
       className="p-2 border border-gray-300 rounded-sm focus:ring-1 focus:ring-[#900000] focus:border-[#900000] transition-colors"
       placeholder={placeholder}
       pattern={pattern}
+      step={step}
     />
   </div>
 )
@@ -33,9 +34,8 @@ const SelectField = ({ label, id, value, onChange, required, className = "", opt
             onChange={(e) => onChange(id, e.target.value)}
             className="p-2 border border-gray-300 rounded-sm focus:ring-1 focus:ring-[#900000] focus:border-[#900000] transition-colors bg-white appearance-none"
         >
-            <option value="" disabled>Select your gender</option>
             {options.map((option) => (
-                <option key={option.value} value={option.value}>
+                <option key={option.value} value={option.value} disabled={option.disabled}>
                     {option.label}
                 </option>
             ))}
@@ -43,10 +43,10 @@ const SelectField = ({ label, id, value, onChange, required, className = "", opt
     </div>
 )
 
-
 const PersonalSection = ({ onNext, onBack, updateField, values }) => {
     
     const genderOptions = [
+        { label: "Select your gender", value: "", disabled: true },
         { label: "Female", value: "Female" },
         { label: "Male", value: "Male" },
     ];
@@ -161,4 +161,5 @@ const PersonalSection = ({ onNext, onBack, updateField, values }) => {
   )
 }
 
-export default PersonalSection
+export { InputField, SelectField }; 
+export default PersonalSection;
