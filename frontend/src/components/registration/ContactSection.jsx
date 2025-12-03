@@ -5,7 +5,6 @@ import { InputField } from './PersonalSection';
 const ContactSection = ({ onNext, onBack, updateField, values }) => { 
   return (
     <div className="flex justify-center mx-auto my-8 max-w-5xl p-0 bg-white shadow-xl rounded-lg overflow-hidden min-h-[520px]">
-      {/* Image/Design Section */}
       <div
         className="w-[38%] p-4 flex flex-col justify-between items-center text-white" 
         style={{
@@ -18,7 +17,6 @@ const ContactSection = ({ onNext, onBack, updateField, values }) => {
       >
       </div>
 
-      {/* Form Section */}
       <div className="w-[62%] p-10 bg-white flex flex-col">
         
         <h2 className="text-2xl font-serif font-light mb-8 text-gray-800 border-b pb-2">
@@ -32,7 +30,6 @@ const ContactSection = ({ onNext, onBack, updateField, values }) => {
           }} 
           className="flex flex-col h-full"
         >
-          {/* Contact Fields */}
           <InputField 
             label="Contact No." 
             id="contactNo" 
@@ -54,7 +51,6 @@ const ContactSection = ({ onNext, onBack, updateField, values }) => {
             className="mb-12" 
           />
           
-          {/* Navigation Buttons */}
           <div className="flex justify-between gap-4 mt-auto">
             <button
               type="button"
