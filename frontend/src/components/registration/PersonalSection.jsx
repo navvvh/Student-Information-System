@@ -67,11 +67,12 @@ const PersonalSection = ({ onNext, onBack, updateField, values }) => {
         <h2 className="text-2xl font-serif font-light mb-8 text-gray-800 border-b pb-2">Enter your details</h2>
 
         <form
+          id="personal-form"
           onSubmit={(e) => {
             e.preventDefault()
             onNext()
           }}
-          className="flex flex-col h-full"
+          className="flex flex-col flex-grow"
         >
           <div className="flex gap-4 mb-4">
             <InputField
@@ -136,25 +137,33 @@ const PersonalSection = ({ onNext, onBack, updateField, values }) => {
             required={true}
             value={values.hometown}
             onChange={updateField}
-            className="mb-12"
+            className="mb-4"
           />
 
-          <div className="flex justify-between gap-4 mt-auto">
-            <button
-              type="button"
-              onClick={onBack}
-              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-alike"
-            >
-              Back
-            </button>
-            <button
-              type="submit"
-              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-alike"
-            >
-              Next
-            </button>
-          </div>
         </form>
+        
+        <div className="flex justify-between gap-4 mt-auto pt-4"> 
+          <button
+            type="button"
+            onClick={onBack}
+            className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-alike"
+          >
+            Back
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              const form = document.getElementById('personal-form');
+              if (form) {
+                form.requestSubmit(); 
+              }
+            }}
+            className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-alike"
+          >
+            Next
+          </button>
+        </div>
+        
       </div>
     </div>
   )
