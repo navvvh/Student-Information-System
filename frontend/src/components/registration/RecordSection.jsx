@@ -1,34 +1,39 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
-import bg8 from "../../assets/asdagffalhaalhjshgd.png";
+import bg8 from "../../assets/asdagffalhaalhjshgd.png"; 
+
+import EditStudentModal from "./EditStudentModal"; 
 
 export default function RecordsSection() {
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedIds, setSelectedIds] = useState(new Set())
+  const [selectedIds, setSelectedIds] = useState(new Set()) 
   const [students, setStudents] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const loadStudents = () => {
-      try {
-        const saved = JSON.parse(localStorage.getItem("students") || "[]")
-        setStudents(saved)
-      } catch (error) {
-        console.error("Error loading students:", error)
-        setStudents([])
-      } finally {
-        setIsLoading(false)
-      }
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [studentToEdit, setStudentToEdit] = useState(null)
+
+
+  const loadStudents = useCallback(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem("students") || "[]")
+      setStudents(saved.map(s => ({ ...s, studentId: String(s.studentId) }))) 
+    } catch (error) {
+      console.error("Error loading students:", error)
+      setStudents([])
+    } finally {
+      setIsLoading(false)
     }
+  }, [])
 
+  useEffect(() => {
     loadStudents()
-
     window.addEventListener("storage", loadStudents)
     return () => window.removeEventListener("storage", loadStudents)
-  }, [])
+  }, [loadStudents])
 
   useEffect(() => {
     if (!isLoading) {
@@ -42,35 +47,65 @@ export default function RecordsSection() {
 
   const toggleSelect = (studentId) => {
     const newSelected = new Set(selectedIds)
-    newSelected.has(studentId) ? newSelected.delete(studentId) : newSelected.add(studentId)
+    const idKey = String(studentId) 
+    
+    newSelected.has(idKey) ? newSelected.delete(idKey) : newSelected.add(idKey)
+    
     setSelectedIds(newSelected)
   }
 
   const toggleSelectAll = () => {
+    const allFilteredIds = filteredStudents.map((s) => String(s.studentId));
+
     if (filteredStudents.length > 0 && selectedIds.size === filteredStudents.length) {
       setSelectedIds(new Set())
     } else {
-      setSelectedIds(new Set(filteredStudents.map((s) => s.id || s.studentId)))
+      setSelectedIds(new Set(allFilteredIds))
     }
   }
 
   const handleEdit = () => {
-    if (selectedIds.size === 0) return alert("Select a student to edit")
+    if (selectedIds.size === 0) {
+      alert("Select a student to edit.")
+      return
+    }
+    if (selectedIds.size > 1) {
+      alert("Please select only ONE student to edit.")
+      return
+    }
+    
     const idToEdit = Array.from(selectedIds)[0]
-    // Store the student ID in sessionStorage for the edit page to retrieve
-    sessionStorage.setItem("editingStudentId", idToEdit)
-    navigate("/edit-student")
+    const student = students.find((s) => String(s.studentId) === idToEdit)
+
+    if (student) {
+      setStudentToEdit(student)
+      setIsEditModalOpen(true)
+    } else {
+      alert("Student data not found.")
+    }
+  }
+
+  const handleSaveEdit = (updatedStudent) => {
+    setStudents((prevStudents) =>
+      prevStudents.map((s) =>
+        String(s.studentId) === String(updatedStudent.studentId) ? updatedStudent : s
+      )
+    )
+    setSelectedIds(new Set()) 
   }
 
   const handleDelete = () => {
     if (selectedIds.size === 0) return alert("Select students to delete")
-    const updated = students.filter((s) => !selectedIds.has(s.id || s.studentId))
+    if (!window.confirm(`Are you sure you want to delete ${selectedIds.size} student(s)?`)) return
+
+    const updated = students.filter((s) => !selectedIds.has(String(s.studentId)))
     setStudents(updated)
     setSelectedIds(new Set())
   }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
+      
       <header className="bg-[#640000] text-white px-4 py-3 flex items-center gap-3">
         <img src={bg8} alt="Montclair" className="size-16 -m-5" />
         <span className="text-1xl font-alike leading-tight">
@@ -79,6 +114,7 @@ export default function RecordsSection() {
       </header>
 
       <main className="flex flex-col flex-1 px-6 py-8 w-full min-h-[calc(100vh-96px)]">
+        
         <div className="mb-4 flex justify-center">
           <div className="relative w-full max-w-md">
             <input
@@ -98,7 +134,10 @@ export default function RecordsSection() {
                 <th className="px-4 py-3 w-12">
                   <input
                     type="checkbox"
-                    checked={filteredStudents.length > 0 && selectedIds.size === filteredStudents.length}
+                    checked={
+                      filteredStudents.length > 0 &&
+                      selectedIds.size === filteredStudents.length
+                    }
                     onChange={toggleSelectAll}
                     className="w-4 h-4 cursor-pointer"
                   />
@@ -133,12 +172,15 @@ export default function RecordsSection() {
                 </tr>
               ) : (
                 filteredStudents.map((student) => (
-                  <tr key={student.id || student.studentId} className="border-b border-gray-200 hover:bg-gray-50">
+                  <tr
+                    key={student.studentId}
+                    className="border-b border-gray-200 hover:bg-gray-50"
+                  >
                     <td className="px-4 py-4">
                       <input
                         type="checkbox"
-                        checked={selectedIds.has(student.id || student.studentId)}
-                        onChange={() => toggleSelect(student.id || student.studentId)}
+                        checked={selectedIds.has(String(student.studentId))}
+                        onChange={() => toggleSelect(String(student.studentId))}
                         className="w-4 h-4 cursor-pointer"
                       />
                     </td>
@@ -147,7 +189,7 @@ export default function RecordsSection() {
                     <td className="px-4 py-4 whitespace-nowrap">{student.lastName}</td>
                     <td className="px-4 py-4 whitespace-nowrap">{student.middleInitial}</td>
                     <td className="px-4 py-4 whitespace-nowrap">{student.gender}</td>
-                    <td className="px-4 py-4 whitespace-nowrap">{student.birthdate}</td>
+                    <td className="px-4 py-4 whitespace-nowrap">{student.birthdate}</td> 
                     <td className="px-4 py-4 whitespace-nowrap">{student.hometown}</td>
                     <td className="px-4 py-4 whitespace-nowrap">{student.contactNo}</td>
                     <td className="px-4 py-4">{student.email}</td>
@@ -165,7 +207,7 @@ export default function RecordsSection() {
         <div className="mt-4 flex justify-between items-center gap-4 pt-4 sticky bottom-0 bg-gray-50 p-4">
           <button
             onClick={() => navigate(-1)}
-            className="px-6 py-2 bg-[#640000] text-white rounded-lg hover:bg-red-800 font-medium transition"
+            className="px-6 py-2 bg-[#640000] text-white rounded-lg hover:bg-red-800 font-medium transition font-alike"
           >
             Back
           </button>
@@ -173,13 +215,13 @@ export default function RecordsSection() {
           <div className="flex gap-4">
             <button
               onClick={handleEdit}
-              className="px-6 py-2 bg-[#640000] text-white rounded-lg hover:bg-red-800 font-medium transition"
+              className="px-6 py-2 bg-[#640000] text-white rounded-lg hover:bg-red-800 font-medium transition font-alike"
             >
               Edit
             </button>
             <button
               onClick={handleDelete}
-              className="px-6 py-2 bg-[#640000] text-white rounded-lg hover:bg-red-800 font-medium transition"
+              className="px-6 py-2 bg-[#640000] text-white rounded-lg hover:bg-red-800 font-medium transition font-alike"
             >
               Delete
             </button>
@@ -188,13 +230,21 @@ export default function RecordsSection() {
       </main>
 
       <footer className="bg-[#640000] text-white py-4 px-6">
-        <div className="mx-auto flex justify-between items-center text-sm">
+        <div className="mx-auto flex justify-between items-center text-sm font-alike">
           <p>Montclair Academy © 2025</p>
           <a href="#" className="hover:text-red-100">
             Privacy Policy
           </a>
         </div>
       </footer>
+
+      {isEditModalOpen && (
+        <EditStudentModal
+          student={studentToEdit}
+          onSave={handleSaveEdit}
+          onClose={() => setIsEditModalOpen(false)}
+        />
+      )}
     </div>
   )
 }

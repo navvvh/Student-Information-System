@@ -143,14 +143,13 @@ const PersonalSection = ({ onNext, onBack, updateField, values }) => {
             <button
               type="button"
               onClick={onBack}
-              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-semibold"
+              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-alike"
             >
               Back
             </button>
             <button
               type="submit"
-              onClick={onNext} // Inalis ko ang 'onNext' sa loob ng onSubmit at inilipat dito para mas malinaw ang flow.
-              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-semibold"
+              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-alike"
             >
               Next
             </button>

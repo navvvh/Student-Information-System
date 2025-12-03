@@ -55,13 +55,13 @@ const ContactSection = ({ onNext, onBack, updateField, values }) => {
             <button
               type="button"
               onClick={onBack}
-              className="px-8 py-2 bg-gray-200 text-gray-700 rounded-md shadow-lg hover:bg-gray-300 transition-colors font-semibold"
+              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-alike"
             >
               Back
             </button>
             <button 
               type="submit" 
-              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-semibold"
+              className="px-8 py-2 bg-[#640000] text-white rounded-md shadow-lg hover:bg-red-800 transition-colors font-alike"
             >
               Next
             </button>
