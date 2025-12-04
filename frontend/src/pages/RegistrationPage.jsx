@@ -9,6 +9,7 @@ import AcadInfoSection from "../components/registration/AcadInfoSection"
 import flag from "../assets/flag.png"
 import { toast } from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 const RegistrationPage = () => {
     const navigate = useNavigate()
@@ -63,25 +64,25 @@ const RegistrationPage = () => {
         return true
     }
 
-    const handleFinish = () => {
-        if (!validateForm()) return
+  const handleFinish = () => {
+    if (!validateForm()) return
 
-        toast.loading("Submitting...")
+    toast.loading("Submitting...")
 
-        setTimeout(() => {
-            toast.dismiss()
-            toast.success("Registration Complete!")
+    setTimeout(() => {
+      toast.dismiss()
+      toast.success("Registration Complete!")
 
-            const existing = JSON.parse(localStorage.getItem("students") || "[]")
-            existing.push({
-                ...formData,
-                id: Date.now(),
-            })
-            localStorage.setItem("students", JSON.stringify(existing))
+      const existing = JSON.parse(localStorage.getItem("students") || "[]")
+      existing.push({
+        ...formData,
+        id: Date.now(), // Added unique ID for proper tracking
+      })
+      localStorage.setItem("students", JSON.stringify(existing))
 
-            navigate("/records", { replace: true })
-        }, 800)
-    }
+      navigate("/records", { replace: true })
+    }, 800)
+  }
 
     return (
         <div className="relative w-full min-h-screen overflow-hidden flex flex-col">
