@@ -31,22 +31,22 @@ const EditStudentModal = ({ student, onSave, onClose }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+//Edited and Updated version of students data goes through database
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
     const dataToSave = {
       ...formData,
-      birthdate: formatDateToDisplay(formData.birthdate),
-      enrollmentDate: formatDateToDisplay(formData.enrollmentDate),
-    };
+      };
 
     if (!dataToSave.studentId || !dataToSave.firstName || !dataToSave.lastName) {
       alert("Please fill out all required fields.");
       return;
     }
-    onSave(dataToSave); 
+    
+    await onSave(dataToSave); 
     onClose();
-  };
+};
+//Edited and Updated version of students data goes through database 
 
   const inputClass =
     "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-900 bg-white text-gray-800 font-alike";

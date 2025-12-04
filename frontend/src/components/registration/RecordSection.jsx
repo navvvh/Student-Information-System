@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import bg8 from "../../assets/asdagffalhaalhjshgd.png"; 
+import axios from "axios";
 
 import EditStudentModal from "./EditStudentModal"; 
 
@@ -17,29 +18,23 @@ export default function RecordsSection() {
   const [studentToEdit, setStudentToEdit] = useState(null)
 
 
-  const loadStudents = useCallback(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem("students") || "[]")
-      setStudents(saved.map(s => ({ ...s, studentId: String(s.studentId) }))) 
+const API_URL = 'http://localhost:5000/user/';
+
+const loadStudents = useCallback(async () => {
+    setIsLoading(true);
+    try { 
+        const response = await axios.get(API_URL);
+        setStudents(response.data.map(s => ({ ...s, studentId: String(s.studentId) })));
     } catch (error) {
-      console.error("Error loading students:", error)
-      setStudents([])
+        console.error("Error fetching students from server:", error);
+        setStudents([]);
     } finally {
-      setIsLoading(false)
+        setIsLoading(false);
     }
-  }, [])
-
-  useEffect(() => {
-    loadStudents()
-    window.addEventListener("storage", loadStudents)
-    return () => window.removeEventListener("storage", loadStudents)
-  }, [loadStudents])
-
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem("students", JSON.stringify(students))
-    }
-  }, [students, isLoading])
+}, [API_URL])
+useEffect(() => {
+    loadStudents();
+}, [loadStudents]);
 
   const filteredStudents = students.filter((student) =>
     Object.values(student).some((value) => value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())),
@@ -85,23 +80,62 @@ export default function RecordsSection() {
     }
   }
 
-  const handleSaveEdit = (updatedStudent) => {
-    setStudents((prevStudents) =>
-      prevStudents.map((s) =>
-        String(s.studentId) === String(updatedStudent.studentId) ? updatedStudent : s
-      )
-    )
-    setSelectedIds(new Set()) 
-  }
+//Edited and Updated data reflects on records
+  const handleSaveEdit = async (updatedStudentData) => {
+    try {
+        const studentId = updatedStudentData.studentId;
+        const response = await axios.put(`${API_URL}update/${studentId}`, updatedStudentData);
+        if (response.status === 200) {
+            setStudents((prevStudents) =>
+                prevStudents.map((s) =>
+                    String(s.studentId) === String(studentId) ? response.data.student : s
+                )
+            );
+            alert("Student record updated successfully!");
+        } else {
+            alert(`Update failed: ${response.data.message || 'Unknown error'}`);
+        }
+    } catch (error) {
+        console.error("Error updating student:", error);
+        alert(`Failed to update student: ${error.response?.data?.message || 'Server error'}`);
+    }
+    setSelectedIds(new Set()); 
+};
+//Edited and Updated data reflects on records
 
-  const handleDelete = () => {
-    if (selectedIds.size === 0) return alert("Select students to delete")
-    if (!window.confirm(`Are you sure you want to delete ${selectedIds.size} student(s)?`)) return
-
-    const updated = students.filter((s) => !selectedIds.has(String(s.studentId)))
-    setStudents(updated)
-    setSelectedIds(new Set())
-  }
+//Delete function on both webiste and database
+  const handleDelete = async() => {
+   if (selectedIds.size === 0) return alert("Select students to delete");
+    
+    const studentCount = selectedIds.size;
+    if (!window.confirm(`Are you sure you want to delete ${studentCount} student(s)?`)) return;
+    const idsToDelete = Array.from(selectedIds);
+    let successfulDeletes = 0;
+    const deletePromises = idsToDelete.map(id => 
+        axios.delete(`${API_URL}${id}`) 
+             .then(response => {
+                 if (response.status === 200) {
+                     successfulDeletes++;
+                     return true;
+                 }
+                 console.warn(`Failed to delete student ID ${id}: ${response.data.message}`);
+                 return false;
+             })
+             .catch(error => {
+                 console.error(`Error deleting student ID ${id}:`, error);
+                 return false;
+             })
+    );
+    await Promise.all(deletePromises);
+    if (successfulDeletes > 0) {
+        alert(`Successfully deleted ${successfulDeletes} out of ${studentCount} selected student(s).`);
+        await loadStudents();
+    } else {
+         alert("No students were deleted. Check console for errors or ensure the IDs exist.");
+    }    
+    setSelectedIds(new Set()); 
+};
+//Delete function on both website and database
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
