@@ -1,0 +1,34 @@
+0000000000000000000000000000000000000000 e80f256d3243601f7c33602be7414f096cc13e86 navvvh <vhanhajjmacaraig21@gmail.com> 1763845736 +0800	commit (initial): Initial commit
+e80f256d3243601f7c33602be7414f096cc13e86 0000000000000000000000000000000000000000 navvvh <vhanhajjmacaraig21@gmail.com> 1763845893 +0800	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 e80f256d3243601f7c33602be7414f096cc13e86 navvvh <vhanhajjmacaraig21@gmail.com> 1763845893 +0800	Branch: renamed refs/heads/master to refs/heads/main
+e80f256d3243601f7c33602be7414f096cc13e86 ddafb481e100423d6e70ed4226951cf4b494941f navvvh <vhanhajjmacaraig21@gmail.com> 1763846076 +0800	commit: Initial commit with project files
+ddafb481e100423d6e70ed4226951cf4b494941f ddafb481e100423d6e70ed4226951cf4b494941f navvvh <vhanhajjmacaraig21@gmail.com> 1763846235 +0800	checkout: moving from main to hajj-frontend
+ddafb481e100423d6e70ed4226951cf4b494941f ddafb481e100423d6e70ed4226951cf4b494941f navvvh <vhanhajjmacaraig21@gmail.com> 1763846323 +0800	checkout: moving from hajj-frontend to main
+ddafb481e100423d6e70ed4226951cf4b494941f ddafb481e100423d6e70ed4226951cf4b494941f navvvh <vhanhajjmacaraig21@gmail.com> 1763846383 +0800	checkout: moving from main to hajj-frontend
+ddafb481e100423d6e70ed4226951cf4b494941f 2cff8dcdb22af99bf81bd44a85048342dba37458 navvvh <vhanhajjmacaraig21@gmail.com> 1763846681 +0800	commit: Setting up React and Tailwind CSS
+2cff8dcdb22af99bf81bd44a85048342dba37458 615a24ff118220f00ea329f5d1cc4e18a4afcc3b navvvh <vhanhajjmacaraig21@gmail.com> 1763902357 +0800	commit: Creating the components and the pages
+615a24ff118220f00ea329f5d1cc4e18a4afcc3b 0babc0f8d00a4a0c7ea558fe61144af83fe88127 navvvh <vhanhajjmacaraig21@gmail.com> 1763916096 +0800	commit: done with FrontSection
+0babc0f8d00a4a0c7ea558fe61144af83fe88127 432ab3aacabe81dd2b37ca332b3cd184a6f8d20f navvvh <vhanhajjmacaraig21@gmail.com> 1763921283 +0800	commit: Done with the AboutSection
+432ab3aacabe81dd2b37ca332b3cd184a6f8d20f b07aad37032a9e8af0db501bc4d1be5d88e9d576 navvvh <vhanhajjmacaraig21@gmail.com> 1763923283 +0800	commit: done with the Service Section
+b07aad37032a9e8af0db501bc4d1be5d88e9d576 42534f5e39806a89024ca8c4199937d5c9f053c9 navvvh <vhanhajjmacaraig21@gmail.com> 1763925886 +0800	commit: done sa landing page amen!
+42534f5e39806a89024ca8c4199937d5c9f053c9 0000000000000000000000000000000000000000 navvvh <vhanhajjmacaraig21@gmail.com> 1764249303 +0800	Branch: renamed refs/heads/hajj-frontend to refs/heads/main
+0000000000000000000000000000000000000000 42534f5e39806a89024ca8c4199937d5c9f053c9 navvvh <vhanhajjmacaraig21@gmail.com> 1764249303 +0800	Branch: renamed refs/heads/hajj-frontend to refs/heads/main
+42534f5e39806a89024ca8c4199937d5c9f053c9 42534f5e39806a89024ca8c4199937d5c9f053c9 navvvh <vhanhajjmacaraig21@gmail.com> 1764249345 +0800	checkout: moving from main to hajj-frontend
+42534f5e39806a89024ca8c4199937d5c9f053c9 ecfbf7c8256abc26455e3630b09e21a1eb59a6f3 navvvh <vhanhajjmacaraig21@gmail.com> 1764382907 +0800	commit: thank you at nag connect land-regis
+ecfbf7c8256abc26455e3630b09e21a1eb59a6f3 3553a6a6779cf8461dfa07dd204f63315744a5e2 navvvh <vhanhajjmacaraig21@gmail.com> 1764396180 +0800	commit: finish Personal Section
+3553a6a6779cf8461dfa07dd204f63315744a5e2 4b9b995f2b5f020de02836710c6032b05391cd28 navvvh <vhanhajjmacaraig21@gmail.com> 1764400164 +0800	commit: personal,CAONTACT,ACADINFO tapos na
+4b9b995f2b5f020de02836710c6032b05391cd28 6bb959dcaff0be66f915ef10e1d82961fdeea548 navvvh <vhanhajjmacaraig21@gmail.com> 1764436931 +0800	commit: pa tapos na
+6bb959dcaff0be66f915ef10e1d82961fdeea548 d2655b726f57e2013468b275c7b5fdd73a4a2c58 navvvh <vhanhajjmacaraig21@gmail.com> 1764439595 +0800	commit: finish na po
+d2655b726f57e2013468b275c7b5fdd73a4a2c58 59b27acac44cb651706b6fc563a0adf2c093413b navvvh <vhanhajjmacaraig21@gmail.com> 1764439895 +0800	commit: finish na talaga
+59b27acac44cb651706b6fc563a0adf2c093413b 42534f5e39806a89024ca8c4199937d5c9f053c9 navvvh <vhanhajjmacaraig21@gmail.com> 1764440192 +0800	checkout: moving from hajj-frontend to main
+42534f5e39806a89024ca8c4199937d5c9f053c9 59b27acac44cb651706b6fc563a0adf2c093413b navvvh <vhanhajjmacaraig21@gmail.com> 1764440233 +0800	merge hajj-frontend: Fast-forward
+59b27acac44cb651706b6fc563a0adf2c093413b 59b27acac44cb651706b6fc563a0adf2c093413b navvvh <vhanhajjmacaraig21@gmail.com> 1764440419 +0800	checkout: moving from main to hajj-frontend
+59b27acac44cb651706b6fc563a0adf2c093413b 3a1e274ab87ff68c767f7b93ad7dda3d3c880b8a navvvh <vhanhajjmacaraig21@gmail.com> 1764712910 +0800	commit: Fixing Personal Section
+3a1e274ab87ff68c767f7b93ad7dda3d3c880b8a 8323fccd362f0598444ee28944461f70fcd636c6 navvvh <vhanhajjmacaraig21@gmail.com> 1764716551 +0800	commit: fixing personal,contact, acad info
+8323fccd362f0598444ee28944461f70fcd636c6 60578314cab0ab68f8d7d3820885f7dcacb4958d navvvh <vhanhajjmacaraig21@gmail.com> 1764720254 +0800	commit: done fixing the registration
+60578314cab0ab68f8d7d3820885f7dcacb4958d 59b27acac44cb651706b6fc563a0adf2c093413b navvvh <vhanhajjmacaraig21@gmail.com> 1764720275 +0800	checkout: moving from hajj-frontend to main
+59b27acac44cb651706b6fc563a0adf2c093413b 60578314cab0ab68f8d7d3820885f7dcacb4958d navvvh <vhanhajjmacaraig21@gmail.com> 1764720430 +0800	merge hajj-frontend: Fast-forward
+60578314cab0ab68f8d7d3820885f7dcacb4958d 7a30366eb50b7a3ac804b12c8212ee365f192a74 navvvh <vhanhajjmacaraig21@gmail.com> 1764720532 +0800	commit: na merge ko na yung ibang changes
+7a30366eb50b7a3ac804b12c8212ee365f192a74 7bf4cd309856c1eedc22e54b089b54710291c4d3 navvvh <vhanhajjmacaraig21@gmail.com> 1764725199 +0800	commit: done with the some revisions
+7bf4cd309856c1eedc22e54b089b54710291c4d3 304b9dd6ca79bc3ff1534df2c240323e95fd20b2 navvvh <vhanhajjmacaraig21@gmail.com> 1764726315 +0800	commit: fixing the back button in personal section
+304b9dd6ca79bc3ff1534df2c240323e95fd20b2 23df17b4bf5a418755d797801aa705120f4ce3a1 navvvh <vhanhajjmacaraig21@gmail.com> 1764813274 +0800	commit (merge): Merge branch 'len-database' of https://github.com/navvvh/Student-Information-System
